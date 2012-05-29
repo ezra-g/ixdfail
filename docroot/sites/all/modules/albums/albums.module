@@ -1,0 +1,3 @@
+<?php
+
+include_once('albums.features.inc');
