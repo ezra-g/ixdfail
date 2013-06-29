@@ -61,7 +61,7 @@ label {
   font-weight: 500;
 }
 .form-item label {
-  display: block;  
+  display: block;
   font-size: 1.077em;
   margin-bottom: 0.2em;
   margin-left: 3px;
@@ -106,10 +106,14 @@ select {
 input, select, textarea, button {
   font-family: "Helvetica Neue", Helvetica, Clean, Arial, sans-serif;
 }
+input.form-text {
+  max-width: 100%;
+}
 input, textarea {
   line-height: 1.3em;
 }
-textarea.form-textarea, textarea {
+textarea.form-textarea,
+textarea {
   background-color: #fff;
   border: solid 2px #e6e4de;
   padding: 0.5em;
@@ -183,10 +187,11 @@ input[type="text"]:focus,
 select[multiple="multiple"]:focus,
 .form-text:focus {
   outline: 0;
-  -moz-box-shadow: 0 0 10px rgba(169,169,169,0.5);
-  -webkit-box-shadow: 0 0 10px rgba(169,169,169,0.5);
-  box-shadow: 0 0 10px rgba(169,169,169,0.5);
-  border-color: rgba(213,213,213,0.7);
+  -webkit-box-shadow: 0 0 5px 3px rgba(169,169,169,0.4);
+  -moz-box-shadow: 0 0 5px 3px rgba(169,169,169,0.4);
+  box-shadow: 0 0 5px 3px rgba(169,169,169, 0.4);
+  border-color: rgba(213,213,213,0.5);
+  -webkit-appearance: textfield; /* -webkit-appearance: searchfield; does not support box shadow in Chrome, yet...*/
 }
 
 /* Misc */

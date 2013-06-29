@@ -11,14 +11,14 @@
   -webkit-border-radius: 3px;
   border-radius: 3px;
 }
-.comment header.with-picture {
+.comment header.with-user-picture {
   padding-left: 50px;
 }
 .comment p.submitted {
  font-style: italic;
  margin: 0;
 }
-.comment-title-hidden .with-picture p.submitted {
+.comment-title-hidden .with-user-picture p.submitted {
   padding-top: 8px;
 }
 .comment header .user-picture {

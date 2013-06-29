@@ -1,9 +1,9 @@
 /* CSS for major navigation elements such as menus, pager, superfish etc */
 a {
   text-decoration: none;
-  -moz-transition: all 0.3s linear;
-  -webkit-transition: all 0.3s linear;
-  transition: all 0.3s linear;
+  -moz-transition: all 0.2s linear;
+  -webkit-transition: all 0.2s linear;
+  transition: all 0.2s linear;
 }
 a:link    {}
 a:visited {}
@@ -30,11 +30,8 @@ ul.menu ul {
   margin-left: 15px;
 }
 .region-top-menu {
-  height: 2.6em;
-  background: #fff;
+  height: 2.5em;
   margin-bottom: 10px;
-  -moz-border-radius: 0 0 2px 2px;
-  border-radius: 0 0 2px 2px;
 }
 .region-top-menu .block {
   margin: 0;
@@ -53,12 +50,16 @@ ul.menu ul {
   padding: 0;
   margin: 0;
 }
-.region-top-menu a {
-  height: 2.6em;
-  line-height: 2.6em;
+.region-top-menu .block a {
+  height: 2.5em;
+  line-height: 2.5em;
   padding: 0 10px;
 }
+
 /* Any menu block in the menu-bar region. */
+.menu-toggle {
+  display: none;
+}
 #menu-bar,
 #menu-bar .menu-wrapper {
   clear: both;
@@ -66,7 +67,6 @@ ul.menu ul {
 }
 #menu-bar .menu-wrapper ul.menu {
   margin: 0;
-  font-size: 1.231em;
 }
 #menu-bar .menu-wrapper li,
 #menu-bar .menu-wrapper .menu li {
@@ -74,7 +74,7 @@ ul.menu ul {
   float: left;
   list-style: none;
   margin-left: 0;
-  margin-right: 0.6em;
+  margin-right: 2px;
 }
 #menu-bar .menu-wrapper li a,
 #menu-bar .menu-wrapper .menu li a {
@@ -83,14 +83,7 @@ ul.menu ul {
   padding: 0 2em;
   white-space: nowrap;
 }
-#menu-bar .menu-wrapper ul,
-#menu-bar .menu-wrapper ul.menu,
 #menu-bar .menu-wrapper ul.menu li {
-  margin: 0;
-  padding: 0;
-}
-#menu-bar .menu-wrapper ul.menu li {
-  margin: 0 9px 0 0;
   padding: 0;
 }
 #menu-bar .block {
@@ -102,18 +95,8 @@ ul.menu ul {
 }
 
 /* Superfish Skins */
-ul.sf-menu li ul {
-  display: none; /* Prevent sub menus from momentarily displaying */
-}
-.block-superfish .block-inner,
-.block-superfish .block-inner .content {
-  padding: 0;
-  margin: 0;
-}
-#menu-bar .sf-horizontal li ul,
-#menu-bar .sf-horizontal li:hover ul,
-#menu-bar .sf-horizontal li.sfhover ul {
-  top: 2.5em;
+ul.sf-menu {
+  margin-bottom: 0 !important;
 }
 .sf-vertical,
 .sf-vertical li {
@@ -150,7 +133,7 @@ ul.sf-menu li ul {
 }
 #breadcrumb {
   font-size: 1.231em;
-  margin: 5px 20px;
+  margin: 5px 0;
 }
 #breadcrumb a,
 #breadcrumb a:visited {
@@ -272,7 +255,6 @@ ul.primary li.active a {
 
 /* Secondary */
 ul.secondary {
-  background-color: #fff;
   border-top: solid 1px #e6e4e2;
   line-height: 4ex;
   padding: 1em 1em 0 0;
@@ -301,12 +283,13 @@ ul.action-links {
 }
 
 /* Disable transitions */
+.field-type-addthis a,
 ul.primary li a,
 ul.primary li.active a,
 div.contextual-links-wrapper a,
 .toolbar-toggle-processed {
   -webkit-transition: 0;
-  -moz-transition: all 0s linear 0s;
+  -moz-transition: none 0s linear 0s;
   -o-transition: 0;
   transition: 0;
 }

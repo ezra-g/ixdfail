@@ -4,10 +4,19 @@
 /**
  * Toggles the collapsible region.
  */
-Drupal.behaviors.skyAdminToggle = {
+Drupal.behaviors.skyCollapsRegionToggle = {
   attach: function (context, settings) {
     $('.collapsible-toggle a, context').click(function() {
       $('#section-collapsible').toggleClass('toggle-active').find('.region-collapsible').slideToggle('fast');
+      return false;
+    });
+  }
+}
+
+Drupal.behaviors.skyCollapsMenuToggle = {
+  attach: function (context, settings) {
+    $('.menu-toggle a, context').click(function() {
+      $('#menu-bar').toggleClass('toggle-active').find('nav').slideToggle('fast');
       return false;
     });
   }

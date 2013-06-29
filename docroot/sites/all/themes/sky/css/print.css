@@ -30,9 +30,9 @@ footer,
 .region,
 .region-header,
 .region-content,
-.article,
-.article-title,
-.article-content,
+.node,
+.node-title,
+.node-content,
 .comment,
 .comment-title,
 .comment-content,
@@ -199,7 +199,7 @@ form {
 }
 
 /* Articles */
-.article {
+.node {
   margin-bottom: 10px;
   border-bottom: 1px solid #ccc;
 }

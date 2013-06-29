@@ -2,7 +2,7 @@
 .block {
   margin-bottom: 20px;
 }
-h2.block-title {
+.block-title {
   font-size: 1.385em;
   line-height: 1.2;
   margin: 0 0 0.4em 0;

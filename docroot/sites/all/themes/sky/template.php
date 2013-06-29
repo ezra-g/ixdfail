@@ -6,80 +6,58 @@
  */
 function sky_preprocess_html(&$vars) {
   global $theme_key;
-
-  $theme_name = 'sky';
-
-  // Load the media queries styles
-  $media_queries_css = array(
-    $theme_name . '.responsive.style.css',
-    $theme_name . '.responsive.gpanels.css'
-  );
-  load_subtheme_media_queries($media_queries_css, $theme_name);
+  $theme_name = $theme_key;
 
   // Add a class for the active color scheme
   if (module_exists('color')) {
-    $class = check_plain(get_color_scheme_name($theme_key));
+    $class = check_plain(get_color_scheme_name($theme_name));
     $vars['classes_array'][] = 'color-scheme-' . drupal_html_class($class);
   }
 
   // Add class for the active theme
-  $vars['classes_array'][] = drupal_html_class($theme_key);
-  
+  $vars['classes_array'][] = drupal_html_class($theme_name);
+
   // Browser sniff and add a class, unreliable but quite useful
-  $vars['classes_array'][] = css_browser_selector();
+  // $vars['classes_array'][] = css_browser_selector();
 
   // Add theme settings classes
   $settings_array = array(
-    'font_size',
     'box_shadows',
     'body_background',
     'menu_bullets',
+    'menu_bar_position',
     'content_corner_radius',
     'tabs_corner_radius',
-    'image_alignment',
   );
   foreach ($settings_array as $setting) {
-    $vars['classes_array'][] = theme_get_setting($setting);
-  }
-
-  // Fonts
-  $fonts = array(
-    'bf'  => 'base_font',
-    'snf' => 'site_name_font',
-    'ssf' => 'site_slogan_font',
-    'ptf' => 'page_title_font',
-    'ntf' => 'node_title_font',
-    'ctf' => 'comment_title_font',
-    'btf' => 'block_title_font'
-  );
-  $families = get_font_families($fonts, $theme_key);
-  if (!empty($families)) {
-    foreach ($families as $family) {
-      $vars['classes_array'][] = $family;
-    }
-  }
-
-  // Headings styles
-  if (theme_get_setting('headings_styles_caps') == 1) {
-    $vars['classes_array'][] = 'hs-caps';
-  }
-  if (theme_get_setting('headings_styles_weight') == 1) {
-    $vars['classes_array'][] = 'hs-fwn';
-  }
-  if (theme_get_setting('headings_styles_shadow') == 1) {
-    $vars['classes_array'][] = 'hs-ts';
+    $vars['classes_array'][] = at_get_setting($setting);
   }
 }
 
 /**
- * Hook into the color module.
+ * Override or insert variables into the html template.
  */
 function sky_process_html(&$vars) {
+  // Hook into the color module.
   if (module_exists('color')) {
     _color_html_alter($vars);
   }
 }
+
+/**
+ * Override or insert variables into the page template.
+ */
+function sky_preprocess_page(&$vars) {
+  if ($vars['page']['footer'] || $vars['page']['four_first']|| $vars['page']['four_second'] || $vars['page']['four_third'] || $vars['page']['four_fourth']) {
+    $vars['classes_array'][] = 'with-footer';
+  }
+}
+
+/**
+ * Override or insert variables into the page template.
+ */
 function sky_process_page(&$vars) {
+  // Hook into the color module.
   if (module_exists('color')) {
     _color_page_alter($vars);
   }
@@ -101,20 +79,43 @@ function sky_preprocess_block(&$vars) {
 }
 
 /**
- * Override or insert variables into the field template.
+ * Override or insert variables into the node template.
  */
-function sky_preprocess_field(&$vars) {
-  $element = $vars['element'];
-  $vars['classes_array'][] = 'view-mode-' . $element['#view_mode'];
-  $vars['image_caption_teaser'] = FALSE;
-  $vars['image_caption_full'] = FALSE;
-  if (theme_get_setting('image_caption_teaser') == 1) {
-    $vars['image_caption_teaser'] = TRUE;
+function sky_preprocess_node(&$vars) {
+  // Add class if user picture exists
+  if ($vars['user_picture']) {
+    $vars['header_attributes_array']['class'][] = 'with-picture';
   }
-  if (theme_get_setting('image_caption_full') == 1) {
-    $vars['image_caption_full'] = TRUE;
-  }
-  $vars['field_view_mode'] = '';
-  $vars['field_view_mode'] = $element['#view_mode'];
 }
+
+/**
+ * Override or insert variables into the comment template.
+ */
+function sky_preprocess_comment(&$vars) {
+  // Add class if user picture exists
+  if ($vars['picture']) {
+    $vars['header_attributes_array']['class'][] = 'with-user-picture';
+  }
+}
+
+
+/**
+ * Process variables for region.tpl.php
+ */
+function sky_process_region(&$vars) {
+  // Add the click handle inside region menu bar
+  if ($vars['region'] === 'menu_bar') {
+    $vars['inner_prefix'] = '<h2 class="menu-toggle"><a href="#">' . t('Menu') . '</a></h2>';
+  }
+}
+
+
+
+
+
+
+
+
+
+
 
