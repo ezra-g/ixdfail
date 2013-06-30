@@ -34,13 +34,8 @@ function ixdfail_submit_fail() {
   else {
     global $user;
     $account = $user;
+    $output = node_add('fail');
     drupal_set_title(t('Submit an @site_name', array('@site_name' => variable_get('site_name', 'IxD Fail'))));
-    $node = new stdClass;
-    $node->uid = $account->uid;
-    $node->name = $account->name;
-    $node->type = 'fail';
-    $node->language = '';
-    module_load_include('inc', 'node', 'node.pages');
-    return drupal_get_form('fail_node_form', $node);
+    return $output;
   }
 }
