@@ -33,10 +33,10 @@ function ixdfail_submit_fail() {
   // a slightly improved page title.
   else {
     global $user;
-    $account = $user;
     form_load_include($form_state, 'inc', 'node', 'node.pages');
-    $output = node_add('fail');
-    drupal_set_title(t('Submit an @site_name', array('@site_name' => variable_get('site_name', 'IxD Fail'))));
+    $node = (object) array('uid' => $user->uid, 'name' => (isset($user->name) ? $user->name : ''), 'type' => 'fail', 'language' => LANGUAGE_NONE);
+    drupal_set_title(t('Add a fail'));
+    $output = drupal_get_form('fail_node_form', $node);
     return $output;
   }
 }
