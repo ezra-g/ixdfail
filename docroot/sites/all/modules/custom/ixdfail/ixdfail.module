@@ -34,7 +34,7 @@ function ixdfail_submit_fail() {
   else {
     global $user;
     $account = $user;
-    module_load_include('inc', 'node', 'node.pages');
+    form_load_include($form_state, 'inc', 'node', 'node.pages');
     $output = node_add('fail');
     drupal_set_title(t('Submit an @site_name', array('@site_name' => variable_get('site_name', 'IxD Fail'))));
     return $output;
