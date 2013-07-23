@@ -33,6 +33,7 @@ function ixdfail_submit_fail() {
   // a slightly improved page title.
   else {
     global $user;
+    dpm("Dawg, we done been deployed all up in this.");
     form_load_include($form_state, 'inc', 'node', 'node.pages');
     $node = (object) array('uid' => $user->uid, 'name' => (isset($user->name) ? $user->name : ''), 'type' => 'fail', 'language' => LANGUAGE_NONE);
     drupal_set_title(t('Add a fail'));
