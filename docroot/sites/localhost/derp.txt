@@ -1,0 +1,58 @@
+diff --git a/docroot/includes/database/mysql/query.inc b/docroot/includes/database/mysql/query.inc
+--- a/docroot/includes/database/mysql/query.inc
++++ b/docroot/includes/database/mysql/query.inc
+@@ -86,21 +86,7 @@ class InsertQuery_mysql extends InsertQuery {
+-class TruncateQuery_mysql extends TruncateQuery {
++class TruncateQuery_mysql extends TruncateQuery { }
+@@ -11,8 +11,8 @@ dependencies[] = field_sql_storage
+diff --git a/docroot/modules/field/modules/field_sql_storage/field_sql_storage.info b/docroot/modules/field/modules/field_sql_storage/field_sql_storage.info
+--- a/docroot/modules/field/modules/field_sql_storage/field_sql_storage.info
++++ b/docroot/modules/field/modules/field_sql_storage/field_sql_storage.info
+ files[] = field_sql_storage.test
+diff --git a/docroot/modules/field/modules/field_sql_storage/field_sql_storage.module b/docroot/modules/field/modules/field_sql_storage/field_sql_storage.module
+--- a/docroot/modules/field/modules/field_sql_storage/field_sql_storage.module
++++ b/docroot/modules/field/modules/field_sql_storage/field_sql_storage.module
+@@ -188,7 +188,7 @@ function _field_sql_storage_schema($field) {
+     $real_name = _field_sql_storage_indexname($field['field_name'], $specifier);
+       $sql_storage_column = _field_sql_storage_columnname($field['field_name'], $column_name);
+       $current['foreign keys'][$real_name]['columns'][$sql_storage_column] = $referenced;
+diff --git a/docroot/modules/field/modules/field_sql_storage/field_sql_storage.test b/docroot/modules/field/modules/field_sql_storage/field_sql_storage.test
+--- a/docroot/modules/field/modules/field_sql_storage/field_sql_storage.test
++++ b/docroot/modules/field/modules/field_sql_storage/field_sql_storage.test
+     foreach (_field_sql_storage_schema($prior_field) as $table_name => $table_info) {
+-    $this->assertTrue(array_key_exists('sql', $field['storage']['details']), t('The storage type is SQL.'));
++    $this->assertTrue(array_key_exists('sql', $field['storage']['details']), 'The storage type is SQL.');
+     $details = $field['storage']['details']['sql'];
+       $storage_column_name = _field_sql_storage_columnname($this->field['field_name'], $column_name);
+-    $schema = drupal_get_schema(_field_sql_storage_tablename($field));
++    $schema = drupal_get_schema(_field_sql_storage_tablename($field), TRUE);
+-    $filter_column = _field_sql_storage_columnname($field['field_name'], 'format');
++    $foreign_key_column = _field_sql_storage_columnname($field['field_name'], $foreign_key_name);
+-    $this->assertIdentical($query->queryCallback(), 'field_sql_storage_field_storage_query', t('Pure field queries are handled by the Field storage handler.'));
++    $this->assertIdentical($query->queryCallback(), 'field_sql_storage_field_storage_query', 'Pure field queries are handled by the Field storage handler.');
+-    $this->assertIdentical($query->queryCallback(), 'field_sql_storage_field_storage_query', t('Mixed queries are handled by the Field storage handler.'));
++    $this->assertIdentical($query->queryCallback(), 'field_sql_storage_field_storage_query', 'Mixed queries are handled by the Field storage handler.');
+     $sql = "SELECT menu_name FROM {menu_links} WHERE router_path = 'menu_name_test'";
+     $name = db_query($sql)->fetchField();
+     $sql = "SELECT menu_name FROM {menu_links} WHERE router_path = 'menu_name_test'";
+     $name = db_query($sql)->fetchField();
+     $times2 = db_query($sql, array(':uid' => $user->uid))->fetchObject();
+     $times3 = db_query($sql, array(':uid' => $user->uid))->fetchObject();
+     $times4 = db_query($sql, array(':uid' => $user->uid))->fetchObject();
+     $times5 = db_query($sql, array(':uid' => $user->uid))->fetchObject();
++ *   'driver' => 'mysql',
++ * database type, such as mysql or sqlite, but not always.  The other
++ *   'driver' => 'mysql',
++ * @see DatabaseConnection_mysql::__construct
++ * @see DatabaseConnection_pgsql::__construct
++ * @see DatabaseConnection_sqlite::__construct
++ *     'driver' => 'mysql',
++ *     'driver' => 'pgsql',
++ *     'driver' => 'sqlite',
++   'driver' => 'mysql',
++ *   $db_url = 'mysql://username:password@localhost/databasename';
++ *   $db_url = 'mysqli://username:password@localhost/databasename';
++ *   $db_url = 'pgsql://username:password@localhost/databasename';
++$db_url = 'mysql://root:@localhost/ixdfail_6';
++$db_url = 'mysql://root:@localhost/ixdfail7db';
++      'driver' => 'mysql',
